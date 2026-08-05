@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-gold: var(--accent-rust);
+  --color-gold-soft: var(--accent-rust-soft);
+  --color-accent-rust: var(--accent-rust);
+  --color-accent-rust-soft: var(--accent-rust-soft);
+  --color-charcoal: var(--charcoal);
+  --color-stone: var(--stone);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-serif-italic: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Space Grotesk", "Inter", sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+}
+
+:root {
+  /* Light, warm, editorial */
+  --background: oklch(0.985 0.004 90);
+  --foreground: oklch(0.16 0.01 60);
+  --ink: oklch(0.16 0.01 60);
+  --paper: oklch(0.985 0.004 90);
+  --cream: oklch(0.96 0.012 80);
+  --stone: oklch(0.92 0.012 80);
+  --charcoal: oklch(0.32 0.01 60);
+
+  /* Accent: refined terracotta (replaces gold) */
+  --accent-rust: oklch(0.58 0.13 38);
+  --accent-rust-soft: oklch(0.68 0.10 38);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.01 60);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.01 60);
+  --primary: oklch(0.16 0.01 60);
+  --primary-foreground: oklch(0.985 0.004 90);
+  --secondary: oklch(0.94 0.008 80);
+  --secondary-foreground: oklch(0.16 0.01 60);
+  --muted: oklch(0.94 0.008 80);
+  --muted-foreground: oklch(0.45 0.01 60);
+  --accent: oklch(0.58 0.13 38);
+  --accent-foreground: oklch(0.985 0.004 90);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.008 80);
+  --input: oklch(0.88 0.008 80);
+  --ring: oklch(0.58 0.13 38);
+  --radius: 0.25rem;
+}
+
+.dark {
+  --background: oklch(0.16 0.01 60);
+  --foreground: oklch(0.985 0.004 90);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .font-display { font-family: var(--font-display); font-weight: 400; }
+  .font-italic-serif { font-family: var(--font-serif-italic); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+  .font-label { font-family: var(--font-label); font-weight: 500; letter-spacing: 0.14em; }
+}
+
+@utility container-x {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility hairline {
+  background-image: linear-gradient(to right, currentColor 50%, transparent 0);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; }
+.reveal.in-view { animation: fade-up 0.8s ease-out forwards; }
