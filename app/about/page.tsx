@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const timeline = [
   { y: "2001", t: "Founded", d: "A single store opens on a quiet Malappuram street." },
   { y: "2008", t: "Branch 2", d: "Demand grows. A second location opens nearby." },
-  { y: "2015", t: "Branch 3", d: "Expanding to serve more families across the district." },
+  { y: "2021", t: "Branch 3", d: "Expanding to serve more families across the district." },
   { y: "2026", t: "Goes Online", d: "Our story reaches beyond the storefront." },
 ];
 
