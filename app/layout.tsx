@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "MensClub is Malappuram's trusted premium men's clothing destination since 2001. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
     images: [
-      "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/acf48859-2733-4de9-9cf1-f31a2a24e770/id-preview-c32f4368--44f3393f-0ecd-4abe-8e48-aaaf0ba6eced.lovable.app-1782754962904.png",
+      "/assets/hero.jpg",
     ],
   },
   twitter: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description:
       "MensClub is Malappuram's trusted premium men's clothing destination since 2001. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
     images: [
-      "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/acf48859-2733-4de9-9cf1-f31a2a24e770/id-preview-c32f4368--44f3393f-0ecd-4abe-8e48-aaaf0ba6eced.lovable.app-1782754962904.png",
+      "/assets/hero.jpg",
     ],
   },
 };

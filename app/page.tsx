@@ -5,6 +5,9 @@ import { Marquee } from "@/components/site/Marquee";
 import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowRight, Star, MapPin } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { getActivePostersQuery, getCollectionsQuery } from "@/sanity/lib/queries";
+import { urlForImage } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "MensClub Malappuram — Premium Men's Clothing Since 2001",
@@ -94,7 +97,20 @@ const reviews = [
   { name: "Faisal P.", text: "Got my entire wedding wardrobe here. Premium fabrics, fair pricing, warm service.", role: "Kottappadi" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  let posters = [];
+  let sanityCollections = [];
+  try {
+    posters = await client.fetch(getActivePostersQuery);
+    sanityCollections = await client.fetch(getCollectionsQuery);
+  } catch (error) {
+    console.error("Sanity fetch failed, falling back", error);
+  }
+
+  if (!sanityCollections || sanityCollections.length === 0) {
+    sanityCollections = collections;
+  }
+
   return (
     <SiteLayout>
       <script
@@ -159,6 +175,47 @@ export default function HomePage() {
 
       <Marquee />
 
+      {/* ANNOUNCEMENTS / OFFERS (From Sanity) */}
+      {posters && posters.length > 0 && (
+        <section className="bg-paper border-b border-ink/10 py-12 md:py-16">
+          <div className="container-x">
+            <Reveal>
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-between mb-8">
+                <div>
+                  <div className="font-label text-accent-rust text-[11px] tracking-[0.25em] uppercase mb-2">Announcements</div>
+                  <h2 className="font-display text-3xl md:text-4xl tracking-tight">Special Offers</h2>
+                </div>
+              </div>
+            </Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {posters.map((poster: any, i: number) => (
+                <Reveal key={poster._id} delay={i * 100}>
+                  {poster.link ? (
+                    <Link href={poster.link} className="block group relative aspect-[4/5] overflow-hidden bg-ink/5 rounded-sm">
+                      <Image 
+                        src={urlForImage(poster.image)?.url() || ""} 
+                        alt={poster.image.alt || poster.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                    </Link>
+                  ) : (
+                    <div className="relative aspect-[4/5] overflow-hidden bg-ink/5 rounded-sm border border-ink/10">
+                      <Image 
+                        src={urlForImage(poster.image)?.url() || ""} 
+                        alt={poster.image.alt || poster.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* STATS */}
       <section className="bg-paper border-b border-ink/10">
         <div className="container-x py-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
@@ -197,13 +254,13 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {collections.map((c, i) => (
+            {sanityCollections.map((c: any, i: number) => (
               <Reveal key={c.name} delay={(i % 3) * 100}>
-                <Link href={`/collections/${c.name.toLowerCase().replace(' ', '-')}`} className="group block">
+                <Link href="/collections" className="group block">
                   <div className="relative overflow-hidden aspect-[3/4] bg-ink/5">
                     <Image 
-                      src={c.image}
-                      alt={c.alt}
+                      src={c.image?.asset ? urlForImage(c.image)?.url() || "" : c.image}
+                      alt={c.image?.alt || c.alt || c.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       sizes="(max-width: 768px) 50vw, 33vw"

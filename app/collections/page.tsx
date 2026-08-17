@@ -3,6 +3,9 @@ import Image from "next/image";
 import { SiteLayout, PageHero } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowRight } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { getCollectionsQuery } from "@/sanity/lib/queries";
+import { urlForImage } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Collections — Shirts, Trousers, Dhothi & Ethnic Wear | MensClub Malappuram",
@@ -63,7 +66,18 @@ const collections = [
   },
 ];
 
-export default function CollectionsPage() {
+export default async function CollectionsPage() {
+  let sanityCollections = [];
+  try {
+    sanityCollections = await client.fetch(getCollectionsQuery);
+  } catch (error) {
+    console.error("Sanity fetch failed, falling back", error);
+  }
+
+  if (!sanityCollections || sanityCollections.length === 0) {
+    sanityCollections = collections.map(c => ({ name: c.t, description: c.d, image: c.img, alt: c.alt }));
+  }
+
   return (
     <SiteLayout>
       <PageHero eyebrow="Our Collections" title="Dressed for every occasion." subtitle="Six collections, one destination. Each piece chosen to last beyond the season." />
@@ -71,13 +85,13 @@ export default function CollectionsPage() {
       <section className="bg-paper py-20 md:py-28">
         <div className="container-x">
           <div className="grid md:grid-cols-2 gap-6 md:gap-10">
-            {collections.map((c, i) => (
-              <Reveal key={c.t} delay={(i % 2) * 100}>
+            {sanityCollections.map((c: any, i: number) => (
+              <Reveal key={c.name} delay={(i % 2) * 100}>
                 <article className="group">
                   <div className="relative overflow-hidden aspect-[4/5] bg-ink/5">
                     <Image
-                      src={c.img}
-                      alt={c.alt}
+                      src={c.image?.asset ? urlForImage(c.image)?.url() || "" : c.image}
+                      alt={c.image?.alt || c.alt || c.name}
                       fill
                       priority={i < 2} // Load the first two images instantly for better SEO & UX
                       className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -87,8 +101,8 @@ export default function CollectionsPage() {
                   </div>
                   <div className="mt-6 flex items-start justify-between gap-6">
                     <div>
-                      <div className="font-display text-2xl text-ink tracking-tight">{c.t}</div>
-                      <p className="mt-3 text-ink/60 leading-relaxed max-w-md">{c.d}</p>
+                      <div className="font-display text-2xl text-ink tracking-tight">{c.name}</div>
+                      <p className="mt-3 text-ink/60 leading-relaxed max-w-md">{c.description}</p>
                     </div>
                     <a href="/branches" className="shrink-0 mt-1 font-label text-[11px] tracking-[0.22em] uppercase text-accent-rust inline-flex items-center gap-1 hover:gap-2 transition-all">
                       View in Store <ArrowRight size={14} />

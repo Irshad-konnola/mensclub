@@ -19,22 +19,22 @@ const branches = [
   {
     name: "MensClub — Main Branch",
     addr: "Down Hill, Malappuram, Kerala 676519",
-    phone: "+91 9895978299",
+    phone: "+91 98959 78299",
     tel: "+919895978299",
     hours: "Mon–Sun 9:30AM–9:30PM",
   },
   {
     name: "MensClub — Perinthalmanna",
     addr: "Perinthalmanna, Malappuram, Kerala 679322",
-    phone: "+91 98765 43211",
-    tel: "+919876543211",
+    phone: "+91 98959 78299",
+    tel: "+919895978299",
     hours: "Mon–Sun 9AM–10PM",
   },
   {
     name: "MensClub — Kizhisseri",
     addr: "Kizhisseri, Malappuram, Kerala 673641",
-    phone: "+91 98765 43212",
-    tel: "+919876543212",
+    phone: "+91 98959 78299",
+    tel: "+919895978299",
     hours: "Mon–Sun 9AM–10PM",
   },
 ];
@@ -97,7 +97,7 @@ export default function BranchesPage() {
                         Get Directions <ArrowRight size={14} />
                       </a>
                       <a
-                        href={`https://wa.me/${b.tel.replace('+', '')}`}
+                        href={`https://wa.me/${b.tel.replace('+', '')}?text=Hello%20MensClub%20${encodeURIComponent(b.name.replace('MensClub — ', ''))}%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collections.`}
                         target="_blank" rel="noopener noreferrer"
                         className="border border-ink/30 px-6 py-3 font-label text-[11px] tracking-[0.22em] uppercase text-ink hover:bg-ink hover:text-paper inline-flex items-center gap-2 transition-colors"
                       >
