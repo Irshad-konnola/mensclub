@@ -50,7 +50,7 @@ export function Navbar() {
         </nav>
         <div className="hidden md:block">
           <a
-            href="https://wa.me/919895978299"
+            href="https://wa.me/919895978299?text=Hello%20MensClub%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
             target="_blank"
             rel="noopener"
             className="bg-ink text-paper px-5 py-2.5 font-label text-[11px] tracking-[0.18em] uppercase transition hover:bg-accent-rust"
@@ -83,7 +83,7 @@ export function Navbar() {
               </Link>
             ))}
             <a
-              href="https://wa.me/919895978299"
+              href="https://wa.me/919895978299?text=Hello%20MensClub%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
               target="_blank"
               rel="noopener"
               className="mt-2 bg-ink text-paper px-5 py-3 font-label text-xs tracking-[0.18em] uppercase text-center"
