@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mensclub-psi.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mensclubstore.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -10,25 +10,25 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "MensClub is Malappuram's trusted premium men's clothing destination since 2001. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
+    "MensClub is Malappuram's trusted premium men's clothing destination since 2002. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
   authors: [{ name: "MensClub Malappuram" }],
   openGraph: {
     siteName: "MensClub",
     type: "website",
     title: "MensClub — Premium Men's Clothing in Malappuram, Kerala",
     description:
-      "MensClub is Malappuram's trusted premium men's clothing destination since 2001. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
+      "MensClub is Malappuram's trusted premium men's clothing destination since 2002. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
     images: [
-      "/assets/hero.jpg",
+      "/opengraph-image.png",
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "MensClub — Premium Men's Clothing in Malappuram, Kerala",
     description:
-      "MensClub is Malappuram's trusted premium men's clothing destination since 2001. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
+      "MensClub is Malappuram's trusted premium men's clothing destination since 2002. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
     images: [
-      "/assets/hero.jpg",
+      "/opengraph-image.png",
     ],
   },
 };

@@ -31,8 +31,8 @@ export function Navbar() {
     <header className="sticky top-0 z-50 bg-paper/85 backdrop-blur-md text-ink border-b border-ink/10">
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link href="/" className="flex items-baseline gap-2 text-ink" onClick={() => setOpen(false)}>
-          <span className="font-display text-2xl tracking-tight">MensClub</span>
-          <span className="font-italic-serif text-sm text-accent-rust hidden sm:inline">est. 2001</span>
+          <span className="font-display text-2xl tracking-tight">MensCluB</span>
+          <span className="font-italic-serif text-sm text-accent-rust hidden sm:inline">est. 2002</span>
         </Link>
         <nav className="hidden md:flex items-center gap-9">
           {links.map(l => (

@@ -10,12 +10,12 @@ import { getActivePostersQuery, getCollectionsQuery } from "@/sanity/lib/queries
 import { urlForImage } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
-  title: "MensClub Malappuram — Premium Men's Clothing Since 2001",
+  title: "MensClub Malappuram — Premium Men's Clothing Since 2002",
   description:
     "Malappuram's most trusted men's clothing store. Explore premium shirts, trousers, traditional Kerala dhothi, and ethnic wear across our Kottappadi, Perintalmanna, and Temple Road branches.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "MensClub Malappuram — Premium Men's Clothing Since 2001",
+    title: "MensClub Malappuram — Premium Men's Clothing Since 2002",
     description: "25 years. 3 stores. One name. Malappuram's destination for premium menswear.",
     url: "/",
     images: [
@@ -37,7 +37,7 @@ const jsonLd = {
   name: "MensClub",
   image: "/assets/hero.jpg",
   description:
-    "Premium men's clothing store in Malappuram, Kerala. Formal shirts, trousers, dhothi, and ethnic wear since 2001.",
+    "Premium men's clothing store in Malappuram, Kerala. Formal shirts, trousers, dhothi, and ethnic wear since 2002.",
   url: "https://yourwebsite.com",
   telephone: "+91 9895978299",
   priceRange: "₹₹",
@@ -79,7 +79,7 @@ const jsonLd = {
       closes: "20:30",
     },
   ],
-  foundingDate: "2001",
+  foundingDate: "2002",
   areaServed: "Malappuram District, Kerala",
 };
 
@@ -129,7 +129,7 @@ export default async function HomePage() {
         <div className="container-x relative py-4 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7">
             <Reveal>
-              <div className="font-label text-accent-rust text-[11px] tracking-[0.3em] uppercase mb-6">Malappuram · Est. 2001</div>
+              <div className="font-label text-accent-rust text-[11px] tracking-[0.3em] uppercase mb-6">Malappuram · Est. 2002</div>
             </Reveal>
             <Reveal delay={120}>
               <h1 className="font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.98] tracking-tight">
@@ -290,14 +290,14 @@ export default async function HomePage() {
             <Reveal>
               <div className="font-label text-accent-rust text-[11px] tracking-[0.25em] uppercase mb-5">Our Story</div>
               <h2 className="font-display text-5xl md:text-6xl leading-[1.02] tracking-tight">
-                Trusted<br />since <span className="font-italic-serif text-accent-rust">2001.</span>
+                Trusted<br />since <span className="font-italic-serif text-accent-rust">2002.</span>
               </h2>
             </Reveal>
           </div>
           <div className="md:col-span-7 md:pt-6">
             <Reveal delay={120}>
               <p className="text-ink/75 text-lg leading-relaxed">
-                MensClub opened its doors in 2001 with a quiet promise — to dress the men of Malappuram with fabrics they could trust and styles they could grow into. A single shop on a familiar street has, over twenty-five years, become three.
+                MensClub opened its doors in 2002 with a quiet promise — to dress the men of Malappuram with fabrics they could trust and styles they could grow into. A single shop on a familiar street has, over twenty-five years, become three.
               </p>
             </Reveal>
             <Reveal delay={220}>

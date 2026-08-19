@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="bg-cream text-ink border-t border-ink/10">
       <div className="container-x py-16 md:py-20 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-1">
-          <div className="font-display text-3xl tracking-tight">MensClub</div>
+          <div className="font-display text-3xl tracking-tight">MensCluB</div>
           <p className="font-italic-serif text-accent-rust text-base mt-1">since two thousand one</p>
           <p className="mt-5 text-sm text-ink/60 max-w-xs leading-relaxed">
             Where Malappuram has been dressing well for over two decades.
@@ -52,7 +52,7 @@ export function Footer() {
       <div className="border-t border-ink/10">
         <div className="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-ink/55">
           <div>© {new Date().getFullYear()} MensClub Malappuram. All rights reserved.</div>
-          <div className="font-label tracking-[0.22em] uppercase">Est. 2001 · Malappuram · Kerala</div>
+          <div className="font-label tracking-[0.22em] uppercase">Est. 2 · Malappuram · Kerala</div>
         </div>
       </div>
     </footer>

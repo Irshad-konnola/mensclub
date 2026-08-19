@@ -7,10 +7,10 @@ import { Award, Layers, HeartHandshake, Sparkles } from "lucide-react";
 export const metadata: Metadata = {
   title: "About MensClub — 25 Years of Menswear in Malappuram",
   description:
-    "How MensClub became Malappuram's trusted name in men's clothing. From a single store in 2001 to three branches today.",
+    "How MensClub became Malappuram's trusted name in men's clothing. From a single store in 2002 to three branches today.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About MensClub — Malappuram's Trusted Menswear Since 2001",
+    title: "About MensClub — Malappuram's Trusted Menswear Since 2002",
     description: "Built on trust. Woven in Malappuram. The MensClub story.",
     url: "/about",
     images: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 const timeline = [
-  { y: "2001", t: "Founded", d: "A single store opens on a quiet Malappuram street." },
+  { y: "2002", t: "Founded", d: "A single store opens on a quiet Malappuram street." },
   { y: "2008", t: "Branch 2", d: "Demand grows. A second location opens nearby." },
   { y: "2021", t: "Branch 3", d: "Expanding to serve more families across the district." },
   { y: "2026", t: "Goes Online", d: "Our story reaches beyond the storefront." },
@@ -65,7 +65,7 @@ export default function AboutPage() {
                 A family business with <span className="font-italic-serif text-accent-rust">deep roots.</span>
               </h2>
               <p className="mt-6 text-ink/70 leading-relaxed text-lg">
-                MensClub began in 2001 with a single counter, two tailors, and a clear belief — that the men of Malappuram deserved better. Better fabrics. Better fits. Better service.
+                MensClub began in 2002 with a single counter, two tailors, and a clear belief — that the men of Malappuram deserved better. Better fabrics. Better fits. Better service.
               </p>
               <p className="mt-4 text-ink/65 leading-relaxed">
                 Twenty-five years on, three branches strong, that belief hasn't changed. Generations of Malappuram have stepped into our stores — for first interviews, wedding nights, Eid mornings, and quiet Sundays at home.

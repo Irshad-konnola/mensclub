@@ -1,6 +1,6 @@
 # MensClub Malappuram
 
-The official web application for MensClub, Malappuram's trusted premium men's clothing destination since 2001. Built with modern web technologies, the platform features a highly optimized, fully responsive design, integrated with a headless CMS for seamless content management.
+The official web application for MensClub, Malappuram's trusted premium men's clothing destination since 2002. Built with modern web technologies, the platform features a highly optimized, fully responsive design, integrated with a headless CMS for seamless content management.
 
 ## 🚀 Tech Stack
 
