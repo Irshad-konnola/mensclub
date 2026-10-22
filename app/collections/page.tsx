@@ -7,10 +7,12 @@ import { client } from "@/sanity/lib/client";
 import { getCollectionsQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mensclubstore.in";
+
 export const metadata: Metadata = {
   title: "Collections — Shirts, Trousers, Dhothi & Ethnic Wear | MensClub Malappuram",
   description:
-    "Explore MensClub's curated menswear collections: formal shirts, casual linen, trousers, dhothi, ethnic occasion wear and accessories.",
+    "Explore MensClub's curated menswear collections: formal shirts, casual linen, trousers, Kerala dhothi, wedding ethnic wear and accessories in Malappuram.",
   alternates: { canonical: "/collections" },
   openGraph: {
     title: "MensClub Collections — Dressed for Every Occasion",
@@ -25,6 +27,59 @@ export const metadata: Metadata = {
       },
     ],
   },
+};
+
+const collectionsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "MensClub Menswear Collections",
+  description: "Curated menswear collections: formal shirts, casual linen, trousers, dhothi, ethnic occasion wear and accessories in Malappuram.",
+  url: `${SITE_URL}/collections`,
+  numberOfItems: 6,
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Formal Shirts",
+      description: "Crisp cottons and structured weaves for boardrooms, weddings and weekday confidence.",
+      image: `${SITE_URL}/assets/fromals-c.jpg`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Casual Linen Shirts",
+      description: "Breathable linens and soft cottons made for Kerala weather and easy evenings.",
+      image: `${SITE_URL}/assets/linen-c.jpg`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Trousers & Chinos",
+      description: "Tailored trousers, chinos, and denim — sharp lines and lived-in comfort.",
+      image: `${SITE_URL}/assets/trousers-c.jpg`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: "Dhothi & Mundu",
+      description: "The finest pure-cotton dhothi. From temple visits to family gatherings.",
+      image: `${SITE_URL}/assets/mundu-c.jpg`,
+    },
+    {
+      "@type": "ListItem",
+      position: 5,
+      name: "Ethnic & Occasion Wear",
+      description: "Kurtas, sherwanis and jubbas — quietly grand pieces for the moments that matter.",
+      image: `${SITE_URL}/assets/ethnic-c.jpg`,
+    },
+    {
+      "@type": "ListItem",
+      position: 6,
+      name: "Accessories & Fabrics",
+      description: "Belts, wallets, ties and unstitched fabrics, hand-picked for the discerning man.",
+      image: `${SITE_URL}/assets/fabrics-c.jpg`,
+    },
+  ],
 };
 
 export const revalidate = 60;
@@ -82,6 +137,10 @@ export default async function CollectionsPage() {
 
   return (
     <SiteLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionsJsonLd) }}
+      />
       <PageHero eyebrow="Our Collections" title="Dressed for every occasion." subtitle="Six collections, one destination. Each piece chosen to last beyond the season." />
 
       <section className="bg-paper py-20 md:py-28">
