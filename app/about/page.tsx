@@ -4,6 +4,8 @@ import { SiteLayout, PageHero } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Award, Layers, HeartHandshake, Sparkles } from "lucide-react";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mensclubstore.in";
+
 export const metadata: Metadata = {
   title: "About MensClub — 25 Years of Menswear in Malappuram",
   description:
@@ -24,6 +26,31 @@ export const metadata: Metadata = {
   },
 };
 
+const aboutJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About MensClub Malappuram",
+  description: "How MensClub became Malappuram's trusted name in men's clothing. 25 years of premium menswear across 3 branches.",
+  url: `${SITE_URL}/about`,
+  mainEntity: {
+    "@type": "ClothingStore",
+    name: "MensClub Malappuram",
+    foundingDate: "2002",
+    description: "Premium men's clothing store in Malappuram, Kerala since 2002.",
+    url: SITE_URL,
+    image: `${SITE_URL}/assets/about.jpg`,
+    telephone: "+91 98959 78299",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Down Hill",
+      addressLocality: "Malappuram",
+      addressRegion: "Kerala",
+      postalCode: "676519",
+      addressCountry: "IN",
+    },
+  },
+};
+
 const timeline = [
   { y: "2002", t: "Founded", d: "A single store opens on a quiet Malappuram street." },
   { y: "2008", t: "Branch 2", d: "Demand grows. A second location opens nearby." },
@@ -41,6 +68,10 @@ const pillars = [
 export default function AboutPage() {
   return (
     <SiteLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       <PageHero eyebrow="About MensClub" title="Built on trust. Woven in Malappuram." />
 
       {/* Story */}

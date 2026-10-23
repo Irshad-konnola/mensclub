@@ -3,16 +3,93 @@ import { SiteLayout, PageHero } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Phone, MapPin, Clock, MessageCircle, ArrowRight } from "lucide-react";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mensclubstore.in";
+
 export const metadata: Metadata = {
   title: "Branches — Visit MensClub in Malappuram | 3 Stores",
   description:
-    "Find MensClub stores in Malappuram. Three locations, directions, phone numbers and store timings.",
+    "Visit MensClub stores in Malappuram. Store locations, directions, phone numbers and store timings for Down Hill, Perinthalmanna & Kizhisseri.",
   alternates: { canonical: "/branches" },
   openGraph: {
     title: "MensClub Branches in Malappuram",
     description: "Three stores across Malappuram. Find the one nearest you.",
     url: "/branches",
   },
+};
+
+const branchesJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ClothingStore",
+      "@id": `${SITE_URL}/branches#main-branch`,
+      name: "MensClub — Main Branch Down Hill",
+      telephone: "+91 98959 78299",
+      url: `${SITE_URL}/branches`,
+      priceRange: "₹₹",
+      image: `${SITE_URL}/assets/hero.jpg`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Down Hill",
+        addressLocality: "Malappuram",
+        addressRegion: "Kerala",
+        postalCode: "676519",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 11.0510,
+        longitude: 76.0711,
+      },
+      openingHours: "Mo-Su 09:30-21:30",
+    },
+    {
+      "@type": "ClothingStore",
+      "@id": `${SITE_URL}/branches#perinthalmanna`,
+      name: "MensClub — Perinthalmanna",
+      telephone: "+91 98959 78299",
+      url: `${SITE_URL}/branches`,
+      priceRange: "₹₹",
+      image: `${SITE_URL}/assets/hero.jpg`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Near KSRTC Bus Stand",
+        addressLocality: "Perinthalmanna",
+        addressRegion: "Kerala",
+        postalCode: "679322",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 10.9760,
+        longitude: 76.2255,
+      },
+      openingHours: "Mo-Su 09:00-22:00",
+    },
+    {
+      "@type": "ClothingStore",
+      "@id": `${SITE_URL}/branches#kizhisseri`,
+      name: "MensClub — Kizhisseri",
+      telephone: "+91 98959 78299",
+      url: `${SITE_URL}/branches`,
+      priceRange: "₹₹",
+      image: `${SITE_URL}/assets/hero.jpg`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Main Road",
+        addressLocality: "Kizhisseri",
+        addressRegion: "Kerala",
+        postalCode: "673641",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 11.1667,
+        longitude: 75.9833,
+      },
+      openingHours: "Mo-Su 09:00-22:00",
+    },
+  ],
 };
 
 const branches = [
@@ -42,6 +119,10 @@ const branches = [
 export default function BranchesPage() {
   return (
     <SiteLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(branchesJsonLd) }}
+      />
       <PageHero eyebrow="Our Stores" title="Find us in Malappuram." subtitle="Three branches, one promise. Walk in and see what we mean." />
 
       <section className="bg-paper py-20 md:py-28">

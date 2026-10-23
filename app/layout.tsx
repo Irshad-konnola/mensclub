@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   description:
     "MensClub is Malappuram's trusted premium men's clothing destination since 2002. Shirts, trousers, dhothi, ethnic wear across 3 branches.",
   authors: [{ name: "MensClub Malappuram" }],
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     siteName: "MensClub",
     type: "website",

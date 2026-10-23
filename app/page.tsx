@@ -9,14 +9,16 @@ import { client } from "@/sanity/lib/client";
 import { getActivePostersQuery, getCollectionsQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mensclubstore.in";
+
 export const metadata: Metadata = {
   title: "MensClub Malappuram — Premium Men's Clothing Since 2002",
   description:
-    "Malappuram's most trusted men's clothing store. Explore premium shirts, trousers, traditional Kerala dhothi, and ethnic wear across our Kottappadi, Perintalmanna, and Temple Road branches.",
+    "Malappuram's trusted menswear store since 2002. Premium shirts, trousers, Kerala Kasavu dhothi & ethnic wear across Down Hill, Perinthalmanna & Kizhisseri.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "MensClub Malappuram — Premium Men's Clothing Since 2002",
-    description: "25 years. 3 stores. One name. Malappuram's destination for premium menswear.",
+    description: "25 years. 3 stores. Malappuram's destination for premium menswear and Kasavu dhothi.",
     url: "/",
     images: [
       {
@@ -31,56 +33,106 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-const jsonLd = {
+const faqs = [
+  {
+    q: "Where are MensClub stores located in Malappuram district?",
+    a: "MensClub operates 3 premier showrooms across Malappuram: our flagship store at Down Hill (Malappuram 676519), our Perinthalmanna branch near the KSRTC Bus Stand (679322), and our Kizhisseri branch (673641)."
+  },
+  {
+    q: "What types of men's clothing collections do you stock?",
+    a: "We curate a full spectrum of premium menswear, including corporate formal shirts, breathable pure linen casuals, tailored formal trousers and chinos, traditional Kerala Kasavu dhothi (mundu), wedding sherwanis, festive kurtas, and luxury leather accessories."
+  },
+  {
+    q: "Do you offer custom fitting and bespoke tailoring services?",
+    a: "Yes. MensClub provides master in-house tailoring and custom fitting services across all branches. Whether you need customized trouser lengths, bespoke shirt fittings, or wedding attire alterations, our tailors ensure a clean, tailored drape."
+  },
+  {
+    q: "What are the store timings for MensClub branches?",
+    a: "All three MensClub stores are open 7 days a week, Monday through Sunday, from 9:30 AM to 9:30 PM."
+  },
+  {
+    q: "Can I check current stock or order via WhatsApp?",
+    a: "Yes! You can connect with our team directly on WhatsApp (+91 98959 78299) to enquire about specific collections, wedding party orders, or check current offers and sizes before visiting."
+  }
+];
+
+const storeJsonLd = {
   "@context": "https://schema.org",
   "@type": "ClothingStore",
-  name: "MensClub",
-  image: "/assets/hero.jpg",
+  "@id": `${SITE_URL}/#store`,
+  name: "MensClub Malappuram",
+  image: `${SITE_URL}/assets/hero.jpg`,
   description:
-    "Premium men's clothing store in Malappuram, Kerala. Formal shirts, trousers, dhothi, and ethnic wear since 2002.",
-  url: "https://yourwebsite.com",
+    "Malappuram's trusted premium men's clothing store since 2002. Formal shirts, linen trousers, traditional Kerala Kasavu mundu, and festive ethnic wear across 3 stores.",
+  url: SITE_URL,
   telephone: "+91 9895978299",
   priceRange: "₹₹",
+  currenciesAccepted: "INR",
+  paymentAccepted: "Cash, Credit Card, UPI",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Temple Road, Near BSNL Exchange",
+    streetAddress: "Down Hill",
     addressLocality: "Malappuram",
     addressRegion: "Kerala",
-    postalCode: "676505",
+    postalCode: "676519",
     addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 11.0510,
+    longitude: 76.0711,
   },
   department: [
     {
       "@type": "ClothingStore",
-      name: "MensClub Kottappadi",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Kottappadi, Malappuram",
-        addressRegion: "Kerala",
-      }
-    },
-    {
-      "@type": "ClothingStore",
-      name: "MensClub Perintalmanna",
+      name: "MensClub Perinthalmanna",
+      telephone: "+91 9895978299",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Near KSRTC Bus Stand",
-        addressLocality: "Perintalmanna",
+        addressLocality: "Perinthalmanna",
         addressRegion: "Kerala",
-        postalCode: "679322"
-      }
-    }
+        postalCode: "679322",
+        addressCountry: "IN",
+      },
+    },
+    {
+      "@type": "ClothingStore",
+      name: "MensClub Kizhisseri",
+      telephone: "+91 9895978299",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Kizhisseri Main Road",
+        addressLocality: "Kizhisseri",
+        addressRegion: "Kerala",
+        postalCode: "673641",
+        addressCountry: "IN",
+      },
+    },
   ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       opens: "09:30",
-      closes: "20:30",
+      closes: "21:30",
     },
   ],
   foundingDate: "2002",
   areaServed: "Malappuram District, Kerala",
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a
+    }
+  }))
 };
 
 // Real, public Unsplash image URLs for preview
@@ -117,7 +169,11 @@ export default async function HomePage() {
     <SiteLayout>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(storeJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       {/* HERO */}
@@ -136,19 +192,22 @@ export default async function HomePage() {
                 Where Malappuram<br />
                 gets <span className="font-italic-serif text-accent-rust">dressed.</span>
               </h1>
+              <p className="mt-4 text-accent-rust font-label text-[11px] tracking-[0.22em] uppercase font-semibold">
+                Premium Men&apos;s Clothing Store · Shirts, Trousers, Kasavu Dhothi &amp; Wedding Wear
+              </p>
             </Reveal>
             <Reveal delay={240}>
               <p className="mt-8 text-ink/65 text-lg md:text-xl max-w-md leading-relaxed">
-                Twenty-five years. Three stores. One quietly trusted name.
+                Twenty-five years. Three stores. One quietly trusted name in men&apos;s fashion.
               </p>
             </Reveal>
             <Reveal delay={360}>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link href="/collections" className="bg-ink px-7 py-4 font-label text-[11px] tracking-[0.2em] uppercase text-paper hover:bg-accent-rust transition inline-flex items-center gap-2">
-                  Explore Collections <ArrowRight size={14} />
+                  Explore Menswear Collections <ArrowRight size={14} />
                 </Link>
                 <Link href="/branches" className="border border-ink/30 px-7 py-4 font-label text-[11px] tracking-[0.2em] uppercase text-ink hover:bg-ink hover:text-paper transition">
-                  Visit a Store
+                  Visit Our 3 Stores
                 </Link>
               </div>
             </Reveal>
@@ -270,7 +329,7 @@ export default async function HomePage() {
                     <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-colors duration-300" />
                     <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                       <div className="font-label text-paper text-[11px] tracking-[0.22em] uppercase flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span>Explore</span>
+                        <span>Explore {c.name || "Collection"}</span>
                         <span>→</span>
                       </div>
                     </div>
@@ -314,8 +373,59 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* CRAFTSMANSHIP & HERITAGE DETAIL */}
+      <section className="bg-cream py-20 md:py-28 border-b border-ink/10">
+        <div className="container-x">
+          <div className="max-w-3xl mb-14">
+            <Reveal>
+              <div className="font-label text-accent-rust text-[11px] tracking-[0.25em] uppercase mb-3">
+                Crafted For Malappuram
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl tracking-tight leading-tight">
+                Authentic fabrics, time-honored tailoring, and everyday comfort.
+              </h2>
+              <p className="mt-5 text-ink/70 text-lg leading-relaxed">
+                For over 25 years, MensClub has been the quintessential destination for men&apos;s fashion in Malappuram. From high-grade Giza cotton formal shirts to handwoven Kerala Kasavu dhothis, every garment on our shelves reflects a standard of quality built for life in Kerala.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Reveal delay={100}>
+              <div className="border border-ink/10 bg-paper p-8 h-full">
+                <div className="font-label text-accent-rust text-xs tracking-wider uppercase mb-2">01 · Premium Fabrics</div>
+                <h3 className="font-display text-2xl mb-3 text-ink">Bespoke Cottons &amp; Linens</h3>
+                <p className="text-ink/65 text-sm leading-relaxed">
+                  Engineered for Kerala&apos;s tropical climate, our 100% pure linen shirts and compact cotton trousers offer unmatched breathability, crease resistance, and day-long comfort.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <div className="border border-ink/10 bg-paper p-8 h-full">
+                <div className="font-label text-accent-rust text-xs tracking-wider uppercase mb-2">02 · Kerala Heritage</div>
+                <h3 className="font-display text-2xl mb-3 text-ink">Kasavu Dhothi &amp; Ethnic Wear</h3>
+                <p className="text-ink/65 text-sm leading-relaxed">
+                  Celebrate Onam, Eid, weddings, and family milestones in authentic Kasavu mundu, festive wedding jubbas, and finely crafted sherwanis sourced directly from master weavers.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <div className="border border-ink/10 bg-paper p-8 h-full">
+                <div className="font-label text-accent-rust text-xs tracking-wider uppercase mb-2">03 · Custom Tailoring</div>
+                <h3 className="font-display text-2xl mb-3 text-ink">In-House Master Stitching</h3>
+                <p className="text-ink/65 text-sm leading-relaxed">
+                  Need a personalized cut? Our seasoned in-store tailors provide precise measurements, custom adjustments, and bespoke stitching services to guarantee a flawless drape.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* REVIEWS */}
-      <section className="bg-cream py-24 md:py-32">
+      <section className="bg-paper py-24 md:py-32">
         <div className="container-x">
           <Reveal>
             <div className="text-center mb-14">
@@ -328,7 +438,7 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             {reviews.map((r, i) => (
               <Reveal key={r.name} delay={i * 100}>
-                <article className="border border-ink/10 p-8 bg-paper h-full flex flex-col">
+                <article className="border border-ink/10 p-8 bg-cream h-full flex flex-col">
                   <div className="flex gap-1 text-accent-rust mb-5">
                     {[...Array(5)].map((_, k) => <Star key={k} size={14} fill="currentColor" strokeWidth={0} />)}
                   </div>
@@ -343,9 +453,56 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ SECTION */}
+      <section className="bg-cream py-20 md:py-28 border-y border-ink/10">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Reveal>
+              <div className="font-label text-accent-rust text-[11px] tracking-[0.25em] uppercase mb-3">
+                Got Questions?
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl tracking-tight">
+                Frequently Asked <span className="font-italic-serif text-accent-rust">Questions</span>
+              </h2>
+              <p className="mt-4 text-ink/65 text-base">
+                Everything you need to know about visiting MensClub showrooms, collections, and custom fittings in Malappuram.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="max-w-3xl mx-auto divide-y divide-ink/10">
+            {faqs.map((faq, idx) => (
+              <Reveal key={faq.q} delay={idx * 80}>
+                <div className="py-7">
+                  <h3 className="font-display text-xl md:text-2xl text-ink tracking-tight mb-3">
+                    {faq.q}
+                  </h3>
+                  <p className="text-ink/70 text-base leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Reveal delay={300}>
+              <a
+                href="https://wa.me/919895978299?text=Hello%20MensClub%2C%20I%20have%20a%20question%20about%20your%20clothing%20collections."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3.5 font-label text-[11px] tracking-[0.2em] uppercase hover:bg-accent-rust transition-colors"
+              >
+                Ask Us on WhatsApp <ArrowRight size={14} />
+              </a>
+            </Reveal>
+          </div>
+        </div>
+      </section>
       
       {/* BRANCH CTA */}
-      <section className="bg-paper py-24 md:py-32 relative overflow-hidden border-t border-ink/10">
+      <section className="bg-paper py-24 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: "radial-gradient(50% 50% at 50% 50%, oklch(0.94 0.05 38 / 0.5), transparent 70%)" }} />
         <div className="container-x relative text-center">
           <Reveal>
@@ -354,10 +511,10 @@ export default async function HomePage() {
               Three stores.<br />All in <span className="font-italic-serif text-accent-rust">Malappuram.</span>
             </h2>
             <p className="mt-6 text-ink/60 max-w-md mx-auto">
-              Find us at <strong>Kottappadi</strong>, <strong>Perintalmanna</strong>, and <strong>Temple Road</strong>. Wherever you are in town, there's a MensClub nearby.
+              Find us at <strong>Down Hill</strong>, <strong>Perinthalmanna</strong>, and <strong>Kizhisseri</strong>. Wherever you are in Malappuram district, there&apos;s a MensClub nearby.
             </p>
             <Link href="/branches" className="mt-10 inline-flex items-center gap-2 bg-ink px-8 py-4 font-label text-[11px] tracking-[0.22em] uppercase text-paper hover:bg-accent-rust transition-colors">
-              Find a Branch <ArrowRight size={14} />
+              View Store Locations &amp; Timings <ArrowRight size={14} />
             </Link>
           </Reveal>
         </div>

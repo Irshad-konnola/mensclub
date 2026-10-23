@@ -7,13 +7,12 @@ export function Footer() {
       <div className="container-x py-16 md:py-20 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-1">
           <div className="font-display text-3xl tracking-tight">MensCluB</div>
-          <p className="font-italic-serif text-accent-rust text-base mt-1">since two thousand one</p>
+          <p className="font-italic-serif text-accent-rust text-base mt-1">since two thousand two</p>
           <p className="mt-5 text-sm text-ink/60 max-w-xs leading-relaxed">
             Where Malappuram has been dressing well for over two decades.
           </p>
           <div className="mt-6 flex gap-3">
-            <a href="#" aria-label="Instagram" className="h-9 w-9 grid place-items-center border border-ink/20 hover:border-ink hover:bg-ink hover:text-paper transition"><Instagram size={16} /></a>
-            {/* <a href="#" aria-label="Facebook" className="h-9 w-9 grid place-items-center border border-ink/20 hover:border-ink hover:bg-ink hover:text-paper transition"><Facebook size={16} /></a> */}
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-9 w-9 grid place-items-center border border-ink/20 hover:border-ink hover:bg-ink hover:text-paper transition"><Instagram size={16} /></a>
             <a href="tel:+919895978299" aria-label="Call" className="h-9 w-9 grid place-items-center border border-ink/20 hover:border-ink hover:bg-ink hover:text-paper transition"><Phone size={16} /></a>
           </div>
         </div>
@@ -52,7 +51,7 @@ export function Footer() {
       <div className="border-t border-ink/10">
         <div className="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-ink/55">
           <div>© {new Date().getFullYear()} MensClub Malappuram. All rights reserved.</div>
-          <div className="font-label tracking-[0.22em] uppercase">Est. 2 · Malappuram · Kerala</div>
+          <div className="font-label tracking-[0.22em] uppercase">Est. 2002 · Malappuram · Kerala</div>
         </div>
       </div>
     </footer>
